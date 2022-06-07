@@ -14,5 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('template.welcome');
-});
+    return view('sections.home');
+})->name('home');
+
+Route::get('/profile', function () {
+    return view('sections.profile');
+})->name('profile');
+
+Route::get('/register', function () {
+    return view('sections.register');
+})->name('register');
+
+Route::get('/login', function () {
+    return view('sections.login');
+})->name('login');
