@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PagesViewController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('sections.home');
-})->name('home');
-
-Route::get('/profile', function () {
-    return view('sections.profile');
-})->name('profile');
-
-Route::get('/register', function () {
-    return view('sections.register');
-})->name('register');
-
-Route::get('/login', function () {
-    return view('sections.login');
-})->name('login');
+Route::get('/', [PagesViewController::class, 'homeView'])->name('home.view');
+Route::get('/profile', [PagesViewController::class, 'profileView'])->name('profile.view');
+Route::get('/register', [PagesViewController::class, 'registerView'])->name('register.view');
+Route::post('/register', [UserController::class, 'register'])->name('register.post');
+Route::get('/login', [PagesViewController::class, 'loginView'])->name('login.view');
+Route::post('/login', [UserController::class, 'login'])->name('login.post');;
+Route::post('/logout', [UserController::class, 'logout'])->name('logout.post');

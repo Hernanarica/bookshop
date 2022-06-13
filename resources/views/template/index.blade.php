@@ -9,22 +9,32 @@
 	<body>
 		<header class="flex justify-between px-3 bg-blue-600 text-white h-14">
 			<h1>
-				<a href="{{ route('home') }}" class="flex items-center h-full text-3xl font-bold">BookShop</a>
+				<a href="{{ route('home.view') }}" class="flex items-center h-full text-3xl font-bold">BookShop</a>
 			</h1>
 			<nav class="flex items-center">
 				<ul class="flex gap-6 p-0 m-0 h-full">
 					<li class="h-full">
-						<a href="{{ route('home') }}" class="flex items-center h-full hover:bg-blue-500 px-2">Home</a>
+						<a href="{{ route('home.view') }}" class="flex items-center h-full hover:bg-blue-500 px-2">Home</a>
 					</li>
-					<li class="h-full">
-						<a href="{{ route('profile') }}" class="flex items-center h-full hover:bg-blue-500 px-2">Profile</a>
-					</li>
-					<li class="h-full">
-						<a href="{{ route('register') }}" class="flex items-center h-full hover:bg-blue-500 px-2">Register</a>
-					</li>
-					<li class="h-full">
-						<a href="{{ route('login') }}" class="flex items-center h-full hover:bg-blue-500 px-2">Login</a>
-					</li>
+					@guest
+						<li class="h-full">
+							<a href="{{ route('register.view') }}" class="flex items-center h-full hover:bg-blue-500 px-2">Register</a>
+						</li>
+						<li class="h-full">
+							<a href="{{ route('login.view') }}" class="flex items-center h-full hover:bg-blue-500 px-2">Login</a>
+						</li>
+					@endguest
+					@auth
+						<li class="h-full">
+							<a href="{{ route('profile.view') }}" class="flex items-center h-full hover:bg-blue-500 px-2">Profile</a>
+						</li>
+						<li class="h-full">
+							<form action="{{ route('logout.post') }}" method="post" class="h-full">
+								@csrf
+								<button type="submit" class="flex items-center h-full hover:bg-blue-500 px-2">Logout</button>
+							</form>
+						</li>
+					@endauth
 				</ul>
 			</nav>
 		</header>
